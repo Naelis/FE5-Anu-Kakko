@@ -12,7 +12,11 @@
 // - kun tiedoston lähetys on valmis, kirjoittaa palvelimen vastauksen 'message' elementtiin
 
 // tee tapahtumakuuntelija, joka kutsuu 'upload' funktiota, kun lomake lähetetään
+const msg = document.querySelector('#message');
 
+function upload() {
+
+  msg.innerText = 'Upload in progress...';
 
 // valitaan sivulta input-kenttä, jonka tyyppi on file
 const input = document.querySelector('input[type="file"]');
@@ -32,4 +36,12 @@ fetch('upload.php', ).then((response) => {
   return response.text();
 }).then((text) => {
   console.log(text);
+  msg.innerText = text;
 });
+
+
+
+}
+
+document.querySelector('form').addEventListener("submit", upload);
+
