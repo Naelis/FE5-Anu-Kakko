@@ -14,32 +14,32 @@
 // tee tapahtumakuuntelija, joka kutsuu 'upload' funktiota, kun lomake lähetetään
 const msg = document.querySelector('#message');
 
-function upload() {
 
+function upload(event) {
+
+  event.preventDefault();
   msg.innerText = 'Upload in progress...';
 
-// valitaan sivulta input-kenttä, jonka tyyppi on file
-const input = document.querySelector('input[type="file"]');
-// tehdään FormData -objekti
-const data = new FormData();
-// lisätään tiedosto FormData -objektiin.
-// Huomaa että files on taulukko. Voit siis lähettää useampia tiedostoja.
-data.append('fileToUpload', input.files[0]);
-// tehdään olio asetuksille
-const settings = {
-  method: 'POST',
-  body: data
-};
-// käynnistetään fetch. Tässä tapauksessa palvelin kertoo
-// uploudin onnistumisen/epäonnistumisen tekstillä. Voi olla myös esim json.
-fetch('upload.php', ).then((response) => {
-  return response.text();
-}).then((text) => {
-  console.log(text);
-  msg.innerText = text;
-});
-
-
+  // valitaan sivulta input-kenttä, jonka tyyppi on file
+  const input = document.querySelector('input[type="file"]');
+  // tehdään FormData -objekti
+  const data = new FormData();
+  // lisätään tiedosto FormData -objektiin.
+  // Huomaa että files on taulukko. Voit siis lähettää useampia tiedostoja.
+  data.append('fileToUpload', input.files[0]);
+  // tehdään olio asetuksille
+  const settings = {
+    method: 'POST',
+    body: data
+  };
+  // käynnistetään fetch. Tässä tapauksessa palvelin kertoo
+  // uploudin onnistumisen/epäonnistumisen tekstillä. Voi olla myös esim json.
+  fetch('upload.php', ).then((response) => {
+    return response.text();
+  }).then((text) => {
+    console.log(text);
+    msg.innerText = text;
+  });
 
 }
 
